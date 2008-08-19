@@ -1,4 +1,5 @@
 package hello;
+
 public class Frame {
 public short CANT_FRAMES;
 public short cuadros[];
@@ -13,6 +14,7 @@ public Frame(short[][] x1,short[][] y1, short[] cu, short cf)
     this.cuadros=cu;
     this.CANT_FRAMES=cf;
     AnimacionSet.transform_coords(this);
+   
 }
 public Frame(){};
 }

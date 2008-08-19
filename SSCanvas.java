@@ -9,38 +9,28 @@ class SSCanvas extends Canvas implements Runnable{
 	 //private Sprite miSprite=new Sprite(1);
 	 //private int pos_agu=80;
 	 //private int delta_x=0;
-         public final int SCREEN_SIZE_Y=this.getHeight();
-         public final int SCREEN_SIZE_X=this.getWidth();
-	 private Jugador jugador=new Jugador (this.getHeight(),this.getWidth());;
-         private Frame frame=new Frame();
+        
+	
+         private Jugador jugador=new Jugador (this.getHeight(),this.getWidth());;
          private AnimacionSet animset=new AnimacionSet();
          private ImagenFondo fondo=new ImagenFondo("fondo1.PNG",this.getWidth(),this.getHeight());
          private Numeros num=new Numeros(0,420,this.getWidth(),this.getHeight());
          private Random random=new Random();
          private int puntaje;
-        private Frame fa=new Frame(new short[][]{{217,202,80,100,322,282,170,189,167,169,150}
-	,{303,291,142,159,322,282,170,189,226,228,222}
-	,{303,320,188,217,322,282,170,189,273,278,250}
-	,{303,287,117,154,322,282,170,189,232,232,232}
-	},new short[][]{{129,184,130,100,394,306,402,306,165,228,100}
-	,{129,181,217,171,394,306,402,306,164,230,120}
-	,{129,182,230,171,394,306,402,306,168,229,127}
-	,{129,184,239,183,394,306,402,306,172,235,130}
-	},new short[]{10,10,10,10},(short)4);
-
+       
          public SSCanvas()
          {
            //random.setSeed(System.currentTimeMillis());
            num.set_nums(0x00040406);
            
-           
+           jugador.set_Frame(animset.travolta_general, (short) 0);
 	   
        
 	 }
 	 
 	 public void movimiento()
          {
-             if (jugador.frameActual<frame.CANT_FRAMES)
+             if (jugador.frameActual<jugador.frameDest.CANT_FRAMES)
              {
                  if(jugador.cantCuadros>0 )
                  {
@@ -48,13 +38,13 @@ class SSCanvas extends Canvas implements Runnable{
                  }
                  else
                  {
-                     jugador.cantCuadros=frame.cuadros[jugador.frameActual];
+                     jugador.cantCuadros=jugador.frameDest.cuadros[jugador.frameActual];
                      jugador.frameActual++;
                  }
              }
              else
              {
-                 jugador.set_Frame(fa, (short) 0);
+                 jugador.set_Frame(animset.get_anim_frame(0), (short) 0);
                  num.set_nums(num.transform_random_int(Math.abs(random.nextInt())));
                  
 
