@@ -42,7 +42,7 @@ public class Jugador {
 	public static short SCREEN_SIZE_Y;
 	
         //aca vamos a guardar las cordenadas destino
-        private Frame frameDest;
+        public Frame frameDest;
 
 	//cantidad de cuadros entre la posicion inicial y la final de 1 frame
 	public short cantCuadros;
