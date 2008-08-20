@@ -3,14 +3,14 @@ package hello;
 
 import javax.microedition.midlet.*;
 import javax.microedition.lcdui.*;
-import javax.microedition.media.*;
-import javax.microedition.media.control.VolumeControl;
+
 /**
  * @author Administrador
  */
 public class HelloMIDlet extends MIDlet implements CommandListener {
 
   	 private Command exitCommand;
+         private Command startGame;
 	 private Display display;
 	 private SSCanvas screen;
     
@@ -32,37 +32,15 @@ public class HelloMIDlet extends MIDlet implements CommandListener {
 	 display=Display.getDisplay(this);
          
 	 exitCommand = new Command("Salir",Command.SCREEN,2);
+         startGame=new Command ("Empezar",Command.SCREEN,3);
+
 	 //Connection aguc;//=Connector.open("file:/root1/Readme.txt", Connector.READ);
-	 
-	Player p;
-	VolumeControl vc;
-
-	 try {
-             
-             
-             p=Manager.createPlayer(this.getClass().getResourceAsStream("saturdaynight.mid"), "audio/midi");
-	     //p = Manager.createPlayer("file://pattern.mid");
-	     p.realize();
-            vc=(VolumeControl) p.getControl("VolumeControl");
-            vc.setLevel(100); 
-	     // Grab the tempo control.
-	    
-	     p.start();
-
-	 } catch (Exception ioe) {System.out.print("ERROR********************************\n");
-         System.out.print(ioe.toString());
-System.out.print("ERROR********************************\n");
-         }
-	
-
-	 
-	 
 	 screen=new SSCanvas();
 	 screen.addCommand(exitCommand);
+         screen.addCommand(startGame);
 	 screen.setCommandListener(this);
          
-	 new Thread(screen).start();
-	}
+         }
 	 
 	 public void startApp() throws MIDletStateChangeException {
 	 display.setCurrent(screen);
@@ -79,6 +57,12 @@ System.out.print("ERROR********************************\n");
 	 if (c == exitCommand) {
 	  destroyApp(false);
 	  notifyDestroyed();
+	 }
+         if (c == startGame) {
+             if (!screen.activo){
+                new Thread(screen).start();
+                screen.removeCommand(startGame);
+             }
 
 	 }
 	 

@@ -154,6 +154,9 @@ public class Jugador {
         }
 	
 	public void player_draw(Graphics g){
+            
+                //seteamos el color
+                g.setColor(100,200,200);
 		//mano izquierda
 		//miembro_draw (g,Jugador.CODO_IZQ_INI,Jugador.MANO_IZQ_INI);
                 g.drawLine(this.cuerpo[Jugador.CODO_IZQ_INI].X, this.cuerpo[Jugador.CODO_IZQ_INI].Y, this.cuerpo[Jugador.MANO_IZQ_INI].X, this.cuerpo[Jugador.MANO_IZQ_INI].Y);

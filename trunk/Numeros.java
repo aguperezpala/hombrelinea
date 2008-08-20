@@ -49,7 +49,7 @@ public class Numeros implements Runnable{
         this.POS_RECT_X=convert_x_system((short)posx);
         this.POS_RECT_Y=convert_y_system((short)posy);
         this.color=0x000000FF;
-        this.tiempoEspera=50;
+        this.tiempoEspera=100;
         /*comenzamos el thread*/
         this.thnum=new Thread(this);
         
@@ -214,9 +214,9 @@ public class Numeros implements Runnable{
      {
          if(!this.activo)
          {
-             this.backColors[0]=0x00F0F0F0;//seteamos los colores en una
-             this.backColors[1]=0x00F0F0F0;//especie de blanco
-             this.backColors[2]=0x00F0F0F0;
+             this.backColors[0]=0x00A0A0A0;//seteamos los colores en una
+             this.backColors[1]=0x00A0A0A0;//especie de blanco
+             this.backColors[2]=0x00A0A0A0;
              this.secuencia=(n & 0x00FFFFFF); //inicializamos el contador
             for (short i=0;i<num.length;i++) /*inicializamos*/
                 num[i]=null;
@@ -295,7 +295,7 @@ public class Numeros implements Runnable{
 
      public void run()
      {
-         try{Thread.sleep(this.tiempoEspera+50);}catch (Exception e){};
+         try{Thread.sleep(this.tiempoEspera*2);}catch (Exception e){};
          
         while(get_blue_color()>0) //primera fase
         {
