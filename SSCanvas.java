@@ -10,19 +10,19 @@ class SSCanvas extends Canvas implements Runnable{
 	 //private int pos_agu=80;
 	 //private int delta_x=0;
         
-	
+	 public boolean activo=false;
          private Jugador jugador=new Jugador (this.getHeight(),this.getWidth());;
          private AnimacionSet animset=new AnimacionSet();
          private ImagenFondo fondo=new ImagenFondo("fondo1.PNG",this.getWidth(),this.getHeight());
          private Numeros num=new Numeros(0,420,this.getWidth(),this.getHeight());
          private Random random=new Random();
          private int puntaje;
+         private Sonido sonido=new Sonido();
        
          public SSCanvas()
          {
            //random.setSeed(System.currentTimeMillis());
            num.set_nums(0x00040406);
-           
            jugador.set_Frame(animset.travolta_general, (short) 0);
 	   
        
@@ -44,7 +44,7 @@ class SSCanvas extends Canvas implements Runnable{
              }
              else
              {
-                 jugador.set_Frame(animset.get_anim_frame(0), (short) 0);
+                 jugador.set_Frame(animset.get_anim_frame(random.nextInt()%12), (short) 0);
                  num.set_nums(num.transform_random_int(Math.abs(random.nextInt())));
                  
 
@@ -54,7 +54,15 @@ class SSCanvas extends Canvas implements Runnable{
 
          
 	 public void run() {
-	        
+	        this.activo=true;
+                //esperamos que empieze la musica
+                sonido.start_music();
+                try {
+	                Thread.sleep(2000);
+	            } catch (InterruptedException e) {
+	                System.out.println(e.toString());
+	            }
+                
 	        while (true) {
                  
                 repaint();
@@ -68,6 +76,7 @@ class SSCanvas extends Canvas implements Runnable{
 	                System.out.println(e.toString());
 	            }
 	        }
+                //this.activo=false;
 	    }  
 
 	    public void keyPressed(int keyCode) {
